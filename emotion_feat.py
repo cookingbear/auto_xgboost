@@ -12,6 +12,7 @@ import math
 from collections import defaultdict
 import jieba
 from gensim import corpora, models, similarities
+import traceback
 import sys
 
 import soundfile
@@ -19,41 +20,55 @@ import numpy as np
 from numpy.lib.stride_tricks import as_strided
 from pydub import AudioSegment
 
+from config_util import get_value
+
 
 y_map = {'angry':0, 'sad':1, 'happy':2, 'fear':3, 'neutral':4, 'surprise':5}
 
 
 def create_feats():
-    X_train, Y_train, x_val, y_val = [], [], [], []
+    X_train, Y_train, x_test, y_test = [], [], [], []
     train_part = False
-    val_line = 190
+    if get_value('all_test') == 'True':
+        test_line = 1000000
+    else:
+        test_line = int(get_value('test_num'))
     feat_map = {}
-    with open("casia/emotion_shuffle.json", 'r') as f, open('/home/q/opensmile/caisa_result.json') as rf:
+    with open("/home/q/ruixiong.zhang/emotion_file/human_data/20180412_20_result_shuffle.json", 'r') as f, open('/home/q/opensmile/human_result.json') as rf:
+    #with open("/home/q/ruixiong.zhang/emotion_file/emotion_data/test_data.json", 'r') as f, open('/home/q/opensmile/test_result.json') as rf:
         for egmap in rf:
             egmap = json.loads(egmap)
             feat_map[egmap['key'].encode('utf-8')] = egmap['result']
         
         lines = f.readlines()
-        
         for index, line in enumerate(lines):
             content = json.loads(line)
             result = []
-            if index < val_line:
+            if index < test_line:
                 train_part = False
             else:
                 train_part = True
             if not train_part:
-                # id
                 result.append(content['key'])
-            
-            result.extend(feat_map[content['key'].encode('utf-8')])
-            
+            try:
+                result.extend(feat_map[content['key'].encode('utf-8')])
+            except:
+                traceback.print_exc()
+                continue
             if train_part:
                 X_train.append(result)
-                Y_train.append(y_map[content['emotion']]) 
+                if int(content['type']) in [2, 3]:
+                    Y_train.append(2)
+                else:
+                    Y_train.append(int(content['type'])) 
             else:
-                x_val.append(result)
-                y_val.append(y_map[content['emotion']]) 
+                x_test.append(result)
+                if int(content['type']) in [2, 3]:
+                    y_test.append(2)
+                else:
+                    y_test.append(int(content['type'])) 
+                #y_test.append(0)
             
     #print 'X_train:', len(X_train), len(X_train[0]), 'Y_train:', len(filter(lambda x: x == 1, Y_train))
-    return X_train, Y_train, x_val, y_val
+    print len(X_train), len(x_test)
+    return X_train, Y_train, x_test, y_test

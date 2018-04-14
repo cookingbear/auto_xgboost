@@ -1,0 +1,58 @@
+# kdiff3 ignore
+*.orig
+
+# maven ignore
+target/
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+# package ignore (optional)
+# *.jar
+# *.war
+# *.zip
+# *.tar
+# *.tar.gz
+
+#setting
+config
+*.pyc
+data/
+
+#model
+model_*
+env_zhuanxie/
+*.npz
+*.json
+*.h5
+*.wav
+*.klm
+*.pkl
+*.csv
+*.txt
+*.pdf
+*.tar.gz
+*.fmap
+*/
+*.npy
+*.p
+
