@@ -1,4 +1,16 @@
-#encoding:utf-8
+# encoding: utf-8
+
+'''
+@author: cookingbear
+
+@contact: 664610407@qq.com
+
+@file: e.py
+
+@time: 2018/5/12 下午5:41
+
+'''
+
 import csv
 
 

@@ -1,25 +1,26 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+# encoding: utf-8
+
+'''
+@author: cookingbear
+
+@contact: 664610407@qq.com
+
+@file: boost.py
+
+@time: 2018/5/12 下午5:41
+
+'''
+
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from urllib import quote
-import string
-import time
-import sys
-import random
 
-import cPickle
 import xgboost as xgb
 from config_util import get_value
 
-from sklearn.metrics import precision_recall_curve
-from sklearn.metrics import roc_auc_score
-from sklearn import preprocessing
 import numpy as np
-from sklearn.cross_validation import KFold, train_test_split
+from sklearn.cross_validation import train_test_split
 from sklearn.externals import joblib
-import random
 import pickle
 
 print "load start ..."

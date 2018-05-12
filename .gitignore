@@ -39,8 +39,6 @@ config
 data/
 
 #model
-model_*
-env_zhuanxie/
 *.npz
 *.json
 *.h5
