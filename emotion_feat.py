@@ -34,7 +34,7 @@ def create_feats():
     else:
         test_line = int(get_value('test_num'))
     feat_map = {}
-    with open("/home/q/ruixiong.zhang/emotion_file/human_data/20180412_20_result_shuffle.json", 'r') as f, open('/home/q/opensmile/human_result.json') as rf:
+    with open("/home/q/ruixiong.zhang/emotion_file/human_data/20180419_test_train.json", 'r') as f, open('/home/q/opensmile/human_result.json') as rf:
     #with open("/home/q/ruixiong.zhang/emotion_file/emotion_data/test_data.json", 'r') as f, open('/home/q/opensmile/test_result.json') as rf:
         for egmap in rf:
             egmap = json.loads(egmap)

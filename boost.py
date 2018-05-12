@@ -15,6 +15,7 @@ from config_util import get_value
 
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import roc_auc_score
+from sklearn import preprocessing
 import numpy as np
 from sklearn.cross_validation import KFold, train_test_split
 from sklearn.externals import joblib
@@ -104,17 +105,22 @@ def boost(data=None):
     X_test = discard_id(X_test)
     print "start_compute.."
     
-    learning_rate_list = [0.05]
+    learning_rate_list = [0.03, 0.05]
     subsample = [0.8]
-    max_depth = [5]
-    min_child_weight = [5]
+    max_depth = [4, 5, 6]
+    min_child_weight = [4, 5, 6]
     p = []
     for lr in learning_rate_list:
         for sb in subsample:
             for md in max_depth:
                 for cd in min_child_weight:
                     p.append((lr, sb, md, cd))
-
+    '''
+    scaler = preprocessing.StandardScaler().fit(X_train)
+    X_train = scaler.transform(X_train)
+    X_val = scaler.transform(X_val)
+    X_test = scaler.transform(X_test)
+    '''
     train_data = xgb.DMatrix(data=X_train, label=y_train, feature_names=get_feat_name())
     val_data = xgb.DMatrix(data=X_val, label=y_val, feature_names=get_feat_name())
     test_data = xgb.DMatrix(data=X_test, label=y_test, feature_names=get_feat_name())
