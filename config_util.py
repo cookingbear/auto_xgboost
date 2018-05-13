@@ -14,7 +14,7 @@
 from collections import defaultdict
 
 
-def get_config():
+def __get_config():
     config_dict = defaultdict(str)
     with open("config",'r') as f:
         for line in f:
@@ -28,7 +28,7 @@ def get_config():
 
 
 def get_value(key):
-    config_dict = get_config()
+    config_dict = __get_config()
     return config_dict[key]
 
 
