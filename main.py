@@ -53,7 +53,7 @@ if __name__ == "__main__":
     threshold_adjust(results)
     with open('matrix/matrix.txt', 'w') as wf:
         for result in results:
-            wf.write('http://100.84.164.142:1234/emotion_test_data/' + result[0][0].split('/')[-1] + ' ')
+            wf.write(result[0][0].split('/')[-1] + ' ')
             for r in result[1]:
                 wf.write(str(r) + " ")
             wf.write('\n')
