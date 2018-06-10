@@ -19,14 +19,13 @@ from config_util import get_value
 
 sys.path.append('./')
 
-from emotion_feat import create_feats
 from boost import boost, predict
 from thresholds import threshold_adjust
 
 
 # 准备数据
 def __add_label():
-    X_train, Y_train, x_test, y_test = create_feats()
+    X_train, Y_train, x_test, y_test = create_feats() # todo data preparation step
     print "X_train_num, X_test_num:", len(X_train), len(x_test)
     return X_train, Y_train, x_test, y_test
 
